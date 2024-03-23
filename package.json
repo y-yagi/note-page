@@ -43,7 +43,7 @@
     "@types/marked": "^6.0.0",
     "@types/node": "^20.11.19",
     "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.14",
+    "@types/react-dom": "^18.2.22",
     "@types/react-linkify": "^1.0.4",
     "eslint": "^7.32.0",
     "eslint-config-next": "^13.5.5",
