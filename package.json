@@ -14,7 +14,7 @@
   "dependencies": {
     "@nandorojo/swr-firestore": "^0.16.0",
     "classnames": "2.5.1",
-    "date-fns": "3.3.1",
+    "date-fns": "4.1.0",
     "dompurify": "^3.1.6",
     "easymde": "^2.18.0",
     "firebase": "^8.10.1",
