@@ -9,7 +9,7 @@
     "pretty": "yarn prettier --write .",
     "pretty-check": "yarn prettier --check .",
     "test": "jest",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@nandorojo/swr-firestore": "^0.16.0",
