@@ -6,8 +6,8 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc",
-    "pretty": "yarn prettier --write .",
-    "pretty-check": "yarn prettier --check .",
+    "pretty": "pnpm prettier --write .",
+    "pretty-check": "pnpm prettier --check .",
     "test": "jest",
     "lint": "eslint ."
   },
