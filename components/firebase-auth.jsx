@@ -36,9 +36,13 @@ const FirebaseAuth = () => {
   // https://github.com/firebase/firebaseui-web/issues/213
   const [renderAuth, setRenderAuth] = useState(false);
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setRenderAuth(true);
+    if (typeof window === "undefined") {
+      return undefined;
     }
+    const animationFrame = window.requestAnimationFrame(() => {
+      setRenderAuth(true);
+    });
+    return () => window.cancelAnimationFrame(animationFrame);
   }, []);
   return (
     <div>
