@@ -7,16 +7,18 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export default defineConfig([{
+export default defineConfig([
+  {
     extends: [...next],
 
     plugins: {
-        "unused-imports": unusedImports,
+      "unused-imports": unusedImports,
     },
 
     rules: {
-        "react/display-name": "warn",
-        "react/no-children-prop": "warn",
-        "unused-imports/no-unused-imports": "error",
+      "react/display-name": "warn",
+      "react/no-children-prop": "warn",
+      "unused-imports/no-unused-imports": "error",
     },
-}]);
+  },
+]);
