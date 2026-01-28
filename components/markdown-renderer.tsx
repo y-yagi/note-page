@@ -1,6 +1,6 @@
 import React from "react";
 import DOMPurify from "dompurify";
-import { marked } from "marked";
+import { marked, type Tokens } from "marked";
 
 interface Props {
   content: string;
@@ -9,12 +9,13 @@ interface Props {
 const MarkdownRenderer = ({ content }: Props) => {
   // NOTE: see https://github.com/markedjs/marked/issues/655
   const renderer = new marked.Renderer();
-  const linkRenderer = renderer.link;
-  renderer.link = (href, title, text) => {
-    const localLink = href?.startsWith(
+  const linkRenderer = renderer.link.bind(renderer);
+  renderer.link = (token: Tokens.Link) => {
+    const href = token.href ?? "";
+    const localLink = href.startsWith(
       `${location.protocol}//${location.hostname}`,
     );
-    const html = linkRenderer.call(renderer, href, title, text);
+    const html = linkRenderer(token);
     return localLink
       ? html
       : html.replace(
