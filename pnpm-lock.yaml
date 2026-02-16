@@ -36,8 +36,8 @@ importers:
         specifier: ^3.0.5
         version: 3.0.5
       marked:
-        specifier: ^17.0.1
-        version: 17.0.1
+        specifier: ^17.0.2
+        version: 17.0.2
       next:
         specifier: ^15.5.9
         version: 15.5.9(@babel/core@7.28.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2887,8 +2887,8 @@ packages:
   makeerror@1.0.12:
     resolution: {integrity: sha512-JmqCvUhmt43madlpFzG4BQzG2Z3m6tvQDNKdClZnO3VbIudJYmxsT0FNJMeiB2+JTSlTQTSbU8QdesVmwJcmLg==}
 
-  marked@17.0.1:
-    resolution: {integrity: sha512-boeBdiS0ghpWcSwoNm/jJBwdpFaMnZWRzjA6SkUMYb40SVaN1x7mmfGKp0jvexGcx+7y2La5zRZsYFZI6Qpypg==}
+  marked@17.0.2:
+    resolution: {integrity: sha512-s5HZGFQea7Huv5zZcAGhJLT3qLpAfnY7v7GWkICUr0+Wd5TFEtdlRR2XUL5Gg+RH7u2Df595ifrxR03mBaw7gA==}
     engines: {node: '>= 20'}
     hasBin: true
 
@@ -5319,7 +5319,7 @@ snapshots:
 
   '@types/marked@6.0.0':
     dependencies:
-      marked: 17.0.1
+      marked: 17.0.2
 
   '@types/node@25.2.0':
     dependencies:
@@ -7260,7 +7260,7 @@ snapshots:
     dependencies:
       tmpl: 1.0.5
 
-  marked@17.0.1: {}
+  marked@17.0.2: {}
 
   marked@4.3.0: {}
 
