@@ -53,18 +53,9 @@ importers:
       react-linkify:
         specifier: ^1.0.0-alpha
         version: 1.0.0-alpha
-      react-semantic-toasts:
-        specifier: ^0.6.6
-        version: 0.6.6(prop-types@15.8.1)(react@18.3.1)(semantic-ui-react@2.1.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       react-simplemde-editor:
         specifier: ^5.2.0
         version: 5.2.0(easymde@2.20.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      semantic-ui-css:
-        specifier: ^2.5.0
-        version: 2.5.0
-      semantic-ui-react:
-        specifier: ^2.1.5
-        version: 2.1.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -356,10 +347,6 @@ packages:
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
-
-  '@babel/runtime@7.27.6':
-    resolution: {integrity: sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==}
-    engines: {node: '>=6.9.0'}
 
   '@babel/runtime@7.28.6':
     resolution: {integrity: sha512-05WQkdpL9COIMz4LjTxGpPNCdlpyimKppYNoJ5Di5EUObifl8t4tuLuUBBZEpoLYOmfvIWrsp9fCl0HoPRVTdA==}
@@ -899,18 +886,6 @@ packages:
   '@firebase/webchannel-wrapper@0.5.1':
     resolution: {integrity: sha512-dZMzN0uAjwJXWYYAcnxIwXqRTZw3o14hGe7O6uhwjD1ZQWPVYA5lASgnNskEBra0knVBsOXB4KXg+HnlKewN/A==}
 
-  '@fluentui/react-component-event-listener@0.63.1':
-    resolution: {integrity: sha512-gSMdOh6tI3IJKZFqxfQwbTpskpME0CvxdxGM2tdglmf6ZPVDi0L4+KKIm+2dN8nzb8Ya1A8ZT+Ddq0KmZtwVQg==}
-    peerDependencies:
-      react: ^16.8.0 || ^17 || ^18
-      react-dom: ^16.8.0 || ^17 || ^18
-
-  '@fluentui/react-component-ref@0.63.1':
-    resolution: {integrity: sha512-8MkXX4+R3i80msdbD4rFpEB4WWq2UDvGwG386g3ckIWbekdvN9z2kWAd9OXhRGqB7QeOsoAGWocp6gAMCivRlw==}
-    peerDependencies:
-      react: ^16.8.0 || ^17 || ^18
-      react-dom: ^16.8.0 || ^17 || ^18
-
   '@grpc/grpc-js@1.13.4':
     resolution: {integrity: sha512-GsFaMXCkMqkKIvwCQjCrwH+GHbPKBjhwo/8ZuUkWHqbI73Kky9I+pQltrlT0+MWpedCoosda53lgjYfyEPgxBg==}
     engines: {node: '>=12.10.0'}
@@ -1286,9 +1261,6 @@ packages:
     resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
-  '@popperjs/core@2.11.8':
-    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
-
   '@protobufjs/aspromise@1.1.2':
     resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}
 
@@ -1321,12 +1293,6 @@ packages:
 
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
-
-  '@semantic-ui-react/event-stack@3.1.3':
-    resolution: {integrity: sha512-FdTmJyWvJaYinHrKRsMLDrz4tTMGdFfds299Qory53hBugiDvGC0tEJf+cHsi5igDwWb/CLOgOiChInHwq8URQ==}
-    peerDependencies:
-      react: ^16.0.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
 
   '@sinclair/typebox@0.34.35':
     resolution: {integrity: sha512-C6ypdODf2VZkgRT6sFM8E1F8vR+HcffniX0Kp8MsU8PIfrlXbNCBz0jzj17GjdmjTx1OtZzdH8+iALL21UjF5A==}
@@ -1855,10 +1821,6 @@ packages:
     resolution: {integrity: sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ==}
     engines: {node: '>=12'}
 
-  clsx@1.2.1:
-    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
-    engines: {node: '>=6'}
-
   co@4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
     engines: {iojs: '>= 1.0.0', node: '>= 0.12.0'}
@@ -2219,9 +2181,6 @@ packages:
   execa@5.1.1:
     resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}
     engines: {node: '>=10'}
-
-  exenv@1.2.2:
-    resolution: {integrity: sha512-Z+ktTxTwv9ILfgKCk32OX3n/doe+OcLTRtqK9pcL+JsP3J1/VW8Uvl4ZjLlKqeW4rzK4oesDOGMEMRIZqtP4Iw==}
 
   exit-x@0.2.2:
     resolution: {integrity: sha512-+I6B/IkJc1o/2tiURyz/ivu/O0nKNEArIUB5O7zBrlDVJr22SCLH3xTeEry428LvFhRzIA1g8izguxJ/gbNcVQ==}
@@ -2795,9 +2754,6 @@ packages:
       node-notifier:
         optional: true
 
-  jquery@3.7.1:
-    resolution: {integrity: sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==}
-
   js-cookie@3.0.5:
     resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
     engines: {node: '>=14'}
@@ -2846,9 +2802,6 @@ packages:
   jsx-ast-utils@3.3.5:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}
     engines: {node: '>=4.0'}
-
-  keyboard-key@1.1.0:
-    resolution: {integrity: sha512-qkBzPTi3rlAKvX7k0/ub44sqOfXeLc/jcnGGmj5c7BJpU8eDrEVPyhCvNYAaoubbsLm9uGWwQJO1ytQK1a9/dQ==}
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -3395,9 +3348,6 @@ packages:
   react-fast-compare@2.0.4:
     resolution: {integrity: sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==}
 
-  react-fast-compare@3.2.2:
-    resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
-
   react-firebaseui@5.0.2:
     resolution: {integrity: sha512-ZfIWfRKlKAkMwEI+41rMPkwdNEQEfBLXV6TVaN5er3cdwMD0vQecWt6YOE4/v1ELziaj10NNRB8yB42V56QBMQ==}
     peerDependencies:
@@ -3415,20 +3365,6 @@ packages:
 
   react-linkify@1.0.0-alpha:
     resolution: {integrity: sha512-7gcIUvJkAXXttt1fmBK9cwn+1jTa4hbKLGCZ9J1U6EOkyb2/+LKL1Z28d9rtDLMnpvImlNlLPdTPooorl5cpmg==}
-
-  react-popper@2.3.0:
-    resolution: {integrity: sha512-e1hj8lL3uM+sgSR4Lxzn5h1GxBlpa4CQz0XLF8kx4MDrDRWY0Ena4c97PUeSX9i5W3UAfDP0z0FXCTQkoXUl3Q==}
-    peerDependencies:
-      '@popperjs/core': ^2.0.0
-      react: ^16.8.0 || ^17 || ^18
-      react-dom: ^16.8.0 || ^17 || ^18
-
-  react-semantic-toasts@0.6.6:
-    resolution: {integrity: sha512-sRSL3aikNSVxxhLai785UtSEaSZw3/pxQrPJVmLs83VpAkJyfBhy8RKxxBej0FGr+ah8qCRGHDJUPccNoraHKA==}
-    peerDependencies:
-      prop-types: ^15.7.2
-      react: 16.x.x || 17.x.x
-      semantic-ui-react: '*'
 
   react-simplemde-editor@5.2.0:
     resolution: {integrity: sha512-GkTg1MlQHVK2Rks++7sjuQr/GVS/xm6y+HchZ4GPBWrhcgLieh4CjK04GTKbsfYorSRYKa0n37rtNSJmOzEDkQ==}
@@ -3506,15 +3442,6 @@ packages:
     resolution: {integrity: sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==}
     engines: {node: '>=4'}
 
-  semantic-ui-css@2.5.0:
-    resolution: {integrity: sha512-jIWn3WXXE2uSaWCcB+gVJVRG3masIKtTMNEP2X8Aw909H2rHpXGneYOxzO3hT8TpyvB5/dEEo9mBFCitGwoj1A==}
-
-  semantic-ui-react@2.1.5:
-    resolution: {integrity: sha512-nIqmmUNpFHfovEb+RI2w3E2/maZQutd8UIWyRjf1SLse+XF51hI559xbz/sLN3O6RpLjr/echLOOXwKCirPy3Q==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
@@ -3540,9 +3467,6 @@ packages:
   set-proto@1.0.0:
     resolution: {integrity: sha512-RJRdvCo6IAnPdsvP/7m6bsQqNnn1FCBX5ZNtFL98MmFF/4xAIJTIg1YbHW5DC2W5SKZanrC6i4HsJqlajw/dZw==}
     engines: {node: '>= 0.4'}
-
-  shallowequal@1.1.0:
-    resolution: {integrity: sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==}
 
   sharp@0.34.4:
     resolution: {integrity: sha512-FUH39xp3SBPnxWvd5iib1X8XY7J0K0X7d93sie9CJg2PO8/7gmg89Nve6OjItK53/MlAushNNxteBYfM6DEuoA==}
@@ -3816,9 +3740,6 @@ packages:
 
   walker@1.0.8:
     resolution: {integrity: sha512-ts/8E8l5b7kY0vlWLewOkDXMmPdLcVV4GmOQLyxuSswIJsweeFZtAsMF7k1Nszz+TYBQrlYRmzOnr398y1JemQ==}
-
-  warning@4.0.3:
-    resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==}
 
   webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
@@ -4213,8 +4134,6 @@ snapshots:
       '@babel/plugin-transform-react-pure-annotations': 7.27.1(@babel/core@7.29.0)
     transitivePeerDependencies:
       - supports-color
-
-  '@babel/runtime@7.27.6': {}
 
   '@babel/runtime@7.28.6': {}
 
@@ -4868,19 +4787,6 @@ snapshots:
 
   '@firebase/webchannel-wrapper@0.5.1': {}
 
-  '@fluentui/react-component-event-listener@0.63.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@babel/runtime': 7.28.6
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-
-  '@fluentui/react-component-ref@0.63.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@babel/runtime': 7.28.6
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-is: 16.13.1
-
   '@grpc/grpc-js@1.13.4':
     dependencies:
       '@grpc/proto-loader': 0.7.15
@@ -5303,8 +5209,6 @@ snapshots:
 
   '@pkgr/core@0.2.9': {}
 
-  '@popperjs/core@2.11.8': {}
-
   '@protobufjs/aspromise@1.1.2': {}
 
   '@protobufjs/base64@1.1.2': {}
@@ -5329,13 +5233,6 @@ snapshots:
   '@protobufjs/utf8@1.1.0': {}
 
   '@rtsao/scc@1.1.0': {}
-
-  '@semantic-ui-react/event-stack@3.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      exenv: 1.2.2
-      prop-types: 15.8.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
 
   '@sinclair/typebox@0.34.35': {}
 
@@ -5922,8 +5819,6 @@ snapshots:
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
 
-  clsx@1.2.1: {}
-
   co@4.6.0: {}
 
   codemirror-spell-checker@1.1.2:
@@ -6243,7 +6138,7 @@ snapshots:
       eslint: 9.39.2
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.53.1(eslint@9.39.2)(typescript@5.9.3))(eslint@9.39.2))(eslint@9.39.2)
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.53.1(eslint@9.39.2)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.2)
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.53.1(eslint@9.39.2)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.53.1(eslint@9.39.2)(typescript@5.9.3))(eslint@9.39.2))(eslint@9.39.2))(eslint@9.39.2)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.2)
       eslint-plugin-react: 7.37.5(eslint@9.39.2)
       eslint-plugin-react-hooks: 7.0.1(eslint@9.39.2)
@@ -6276,7 +6171,7 @@ snapshots:
       tinyglobby: 0.2.15
       unrs-resolver: 1.11.1
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.53.1(eslint@9.39.2)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.2)
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.53.1(eslint@9.39.2)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.53.1(eslint@9.39.2)(typescript@5.9.3))(eslint@9.39.2))(eslint@9.39.2))(eslint@9.39.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -6291,7 +6186,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.53.1(eslint@9.39.2)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.2):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.53.1(eslint@9.39.2)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.53.1(eslint@9.39.2)(typescript@5.9.3))(eslint@9.39.2))(eslint@9.39.2))(eslint@9.39.2):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -6457,8 +6352,6 @@ snapshots:
       onetime: 5.1.2
       signal-exit: 3.0.7
       strip-final-newline: 2.0.0
-
-  exenv@1.2.2: {}
 
   exit-x@0.2.2: {}
 
@@ -7283,8 +7176,6 @@ snapshots:
       - supports-color
       - ts-node
 
-  jquery@3.7.1: {}
-
   js-cookie@3.0.5: {}
 
   js-tokens@4.0.0: {}
@@ -7325,8 +7216,6 @@ snapshots:
       array.prototype.flat: 1.3.3
       object.assign: 4.1.7
       object.values: 1.2.1
-
-  keyboard-key@1.1.0: {}
 
   keyv@4.5.4:
     dependencies:
@@ -7919,8 +7808,6 @@ snapshots:
 
   react-fast-compare@2.0.4: {}
 
-  react-fast-compare@3.2.2: {}
-
   react-firebaseui@5.0.2(firebase@8.10.1)(react@18.3.1):
     dependencies:
       firebase: 8.10.1
@@ -7937,20 +7824,6 @@ snapshots:
     dependencies:
       linkify-it: 2.2.0
       tlds: 1.259.0
-
-  react-popper@2.3.0(@popperjs/core@2.11.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      '@popperjs/core': 2.11.8
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-fast-compare: 3.2.2
-      warning: 4.0.3
-
-  react-semantic-toasts@0.6.6(prop-types@15.8.1)(react@18.3.1)(semantic-ui-react@2.1.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
-    dependencies:
-      prop-types: 15.8.1
-      react: 18.3.1
-      semantic-ui-react: 2.1.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   react-simplemde-editor@5.2.0(easymde@2.20.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
@@ -8043,28 +7916,6 @@ snapshots:
       extend-shallow: 2.0.1
       kind-of: 6.0.3
 
-  semantic-ui-css@2.5.0:
-    dependencies:
-      jquery: 3.7.1
-
-  semantic-ui-react@2.1.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      '@babel/runtime': 7.27.6
-      '@fluentui/react-component-event-listener': 0.63.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@fluentui/react-component-ref': 0.63.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@popperjs/core': 2.11.8
-      '@semantic-ui-react/event-stack': 3.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      clsx: 1.2.1
-      keyboard-key: 1.1.0
-      lodash: 4.17.21
-      lodash-es: 4.17.21
-      prop-types: 15.8.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-is: 18.3.1
-      react-popper: 2.3.0(@popperjs/core@2.11.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      shallowequal: 1.1.0
-
   semver@6.3.1: {}
 
   semver@7.7.3: {}
@@ -8092,8 +7943,6 @@ snapshots:
       dunder-proto: 1.0.1
       es-errors: 1.3.0
       es-object-atoms: 1.1.1
-
-  shallowequal@1.1.0: {}
 
   sharp@0.34.4:
     dependencies:
@@ -8446,10 +8295,6 @@ snapshots:
   walker@1.0.8:
     dependencies:
       makeerror: 1.0.12
-
-  warning@4.0.3:
-    dependencies:
-      loose-envify: 1.4.0
 
   webidl-conversions@3.0.1: {}
 

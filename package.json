@@ -27,10 +27,7 @@
     "react-dom": "^18.3.1",
     "react-firebaseui": "^5.0.2",
     "react-linkify": "^1.0.0-alpha",
-    "react-semantic-toasts": "^0.6.6",
     "react-simplemde-editor": "^5.2.0",
-    "semantic-ui-css": "^2.5.0",
-    "semantic-ui-react": "^2.1.5",
     "typescript": "^5.9.3"
   },
   "devDependencies": {

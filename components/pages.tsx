@@ -6,15 +6,6 @@ import Page from "../types/page";
 import Notebook from "../types/notebook";
 import { useUser } from "../lib/useUser";
 import MarkdownRenderer from "./markdown-renderer";
-import {
-  Divider,
-  Header,
-  Button,
-  Segment,
-  Select,
-  Tab,
-  TabProps,
-} from "semantic-ui-react";
 
 interface NoteBookOption {
   key: string;
@@ -70,64 +61,21 @@ const Pages = () => {
     return options;
   }
 
-  function panes(data: Page[]) {
-    let panes: any[] = [];
-
-    data.forEach((page) =>
-      panes.push({
-        menuItem: page.name,
-        render: () => (
-          <Tab.Pane className="Tab-body">
-            <Button
-              type="submit"
-              floated="right"
-              color="red"
-              size="mini"
-              onClick={() => {
-                if (
-                  window.confirm("Are you sure you wish to delete this page?")
-                )
-                  deleteDocument(
-                    `${notebookCollection}${noteBookPath}/pages/${page.id}`,
-                  );
-              }}
-            >
-              Destroy
-            </Button>
-            <Link href={`/pages/${page.id}?book=${noteBookPath}`} passHref>
-              <Button type="submit" floated="right" color="blue" size="mini">
-                Edit
-              </Button>
-            </Link>
-            <MarkdownRenderer content={page.content} />
-          </Tab.Pane>
-        ),
-      }),
-    );
-
-    return panes;
-  }
-
-  function handleTabChange(data: TabProps) {
-    setTabActiveIndex(data.activeIndex as number);
-  }
-
-  function onSelectChange(_event: any, data: any): void {
-    if (data.value === "create_new_note_book") {
+  function onSelectChange(event: React.ChangeEvent<HTMLSelectElement>): void {
+    if (event.target.value === "create_new_note_book") {
       router.push("/notebooks/new");
       return;
     }
-    setNoteBookPath(data.value);
+    setNoteBookPath(event.target.value);
   }
 
   function destroyNotebook(data: Page[]) {
-    if (noteBookPath === "default" || data.length !== 0) return "";
+    if (noteBookPath === "default" || data.length !== 0) return null;
 
     return (
-      <Button
-        type="submit"
-        floated="right"
-        color="red"
+      <button
+        type="button"
+        className="btn btn-red float-right"
         onClick={() => {
           if (window.confirm("Are you sure you wish to delete this notebook?"))
             deleteDocument(`${notebookCollection}${noteBookPath}`);
@@ -135,33 +83,75 @@ const Pages = () => {
         }}
       >
         Destroy a note book
-      </Button>
+      </button>
     );
   }
 
   return (
     <>
-      <Header as="h3" icon textAlign="center" color="grey">
-        <Select
-          options={noteBooksOptions()}
+      <div className="text-center text-gray-600 my-4">
+        <select
+          className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
           onChange={onSelectChange}
-          defaultValue={noteBookPath}
-        />
-      </Header>
-      <Divider hidden section />
+          value={noteBookPath as string}
+        >
+          {noteBooksOptions().map((option) => (
+            <option key={option.key} value={option.value}>
+              {option.text}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="my-4" />
       <Link href={`/pages/new?book=${noteBookPath}`} passHref>
-        <Button as="a" color="blue">
-          Create a new page
-        </Button>
+        <a className="btn btn-blue inline-block">Create a new page</a>
       </Link>
-      <Segment>
-        <Tab
-          panes={panes(data)}
-          menu={{ pointing: true, className: "Tab-wrapped" }}
-          activeIndex={tabActiveIndex}
-          onTabChange={handleTabChange}
-        />
-      </Segment>
+      <div className="border border-gray-300 rounded p-4 my-4">
+        <div className="border-b border-gray-300">
+          <div className="Tab-wrapped">
+            {data.map((page, index) => (
+              <button
+                key={page.id}
+                className={`px-4 py-2 border-b-2 ${
+                  tabActiveIndex === index
+                    ? "border-blue-500 text-blue-500"
+                    : "border-transparent hover:border-gray-300"
+                }`}
+                onClick={() => setTabActiveIndex(index)}
+              >
+                {page.name}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="Tab-body p-4">
+          {data[tabActiveIndex] && (
+            <>
+              <button
+                type="button"
+                className="btn btn-red float-right ml-2"
+                onClick={() => {
+                  if (
+                    window.confirm("Are you sure you wish to delete this page?")
+                  )
+                    deleteDocument(
+                      `${notebookCollection}${noteBookPath}/pages/${data[tabActiveIndex].id}`,
+                    );
+                }}
+              >
+                Destroy
+              </button>
+              <Link
+                href={`/pages/${data[tabActiveIndex].id}?book=${noteBookPath}`}
+                passHref
+              >
+                <a className="btn btn-blue float-right text-sm">Edit</a>
+              </Link>
+              <MarkdownRenderer content={data[tabActiveIndex].content} />
+            </>
+          )}
+        </div>
+      </div>
       {destroyNotebook(data)}
     </>
   );

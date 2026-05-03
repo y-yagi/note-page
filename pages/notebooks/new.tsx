@@ -6,7 +6,6 @@ import Notebook from "../../types/notebook";
 import NotebookForm from "../../components/notebook-form";
 import Signin from "../../components/signin";
 import Intro from "../../components/intro";
-import { Container } from "semantic-ui-react";
 import { fuego } from "@nandorojo/swr-firestore";
 
 const New = () => {
@@ -32,10 +31,10 @@ const New = () => {
         <Head>
           <title>NoteBook</title>
         </Head>
-        <Container>
+        <div className="container mx-auto px-4">
           <Intro />
           <NotebookForm notebook={notebook} action={submit} />
-        </Container>
+        </div>
       </Layout>
     </>
   );

@@ -4,10 +4,7 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { Formik } from "formik";
 import SimpleMDE from "easymde";
-import { Button, Form } from "semantic-ui-react";
-import { SemanticToastContainer, toast } from "react-semantic-toasts";
 import "easymde/dist/easymde.min.css";
-import "react-semantic-toasts/styles/react-semantic-alert.css";
 import Page from "../types/page";
 import { useFormGuard } from "../lib/useFormGuard";
 
@@ -24,6 +21,7 @@ const PageForm: NextPage<Props> = ({ page, action }) => {
   const router = useRouter();
   const [name, setName] = useState(page.name);
   const [content, setContent] = useState(page.content);
+  const [toastMessage, setToastMessage] = useState("");
 
   const handleKeyPress = (e: KeyboardEvent) => {
     if (page.id !== "" && e.ctrlKey && e.key === "s") {
@@ -39,7 +37,8 @@ const PageForm: NextPage<Props> = ({ page, action }) => {
       }, 500);
 
       setTimeout(() => {
-        toast({ title: "info", description: msg });
+        setToastMessage(msg);
+        setTimeout(() => setToastMessage(""), 3000);
       }, 1000);
     }
   };
@@ -81,7 +80,11 @@ const PageForm: NextPage<Props> = ({ page, action }) => {
 
   return (
     <section>
-      <SemanticToastContainer />
+      {toastMessage && (
+        <div className="fixed top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded shadow-lg z-50">
+          {toastMessage}
+        </div>
+      )}
       <h3 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
         Pages
       </h3>
@@ -97,10 +100,13 @@ const PageForm: NextPage<Props> = ({ page, action }) => {
         enableReinitialize={true}
       >
         {({ handleSubmit, isSubmitting }) => (
-          <Form onSubmit={handleSubmit}>
-            <Form.Field required>
-              <label>Page Name</label>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="form-field">
+              <label className="block font-bold mb-2">
+                Page Name<span className="text-red-500">*</span>
+              </label>
               <input
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
                 placeholder="Name"
                 required
                 name="name"
@@ -108,32 +114,34 @@ const PageForm: NextPage<Props> = ({ page, action }) => {
                 value={name}
                 data-testid="pagename"
               />
-            </Form.Field>
-            <Form.Field required>
-              <label>Content</label>
+            </div>
+            <div className="form-field">
+              <label className="block font-bold mb-2">
+                Content<span className="text-red-500">*</span>
+              </label>
               <SimpleMdeReact
                 value={content}
                 onChange={onMDEchange}
                 options={simpleMDEOptions}
               />
-            </Form.Field>
-            <Button
-              type="button"
-              color="red"
-              floated="left"
-              onClick={() => router.back()}
-            >
-              cancel
-            </Button>
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              color="blue"
-              floated="right"
-            >
-              submit
-            </Button>
-          </Form>
+            </div>
+            <div className="flex justify-between">
+              <button
+                type="button"
+                className="btn btn-red"
+                onClick={() => router.back()}
+              >
+                cancel
+              </button>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn btn-blue"
+              >
+                submit
+              </button>
+            </div>
+          </form>
         )}
       </Formik>
     </section>

@@ -8,7 +8,6 @@ import Page from "../../types/page";
 import PageForm from "../../components/page-form";
 import Intro from "../../components/intro";
 import Signin from "../../components/signin";
-import { Container } from "semantic-ui-react";
 
 const New = () => {
   const { user } = useUser();
@@ -51,10 +50,10 @@ const New = () => {
         <Head>
           <title>NoteBook</title>
         </Head>
-        <Container>
+        <div className="container mx-auto px-4">
           <Intro />
           <PageForm page={page} action={submit} />
-        </Container>
+        </div>
       </Layout>
     </>
   );

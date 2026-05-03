@@ -1,5 +1,4 @@
 import { Formik } from "formik";
-import { Button, Form } from "semantic-ui-react";
 import { useRouter } from "next/router";
 import { NextPage } from "next";
 import Notebook from "../types/notebook";
@@ -28,33 +27,36 @@ const NotebookForm: NextPage<Props> = ({ notebook, action }) => {
         enableReinitialize={true}
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
-          <Form onSubmit={handleSubmit}>
-            <Form.Field required>
-              <label>Notebook ID</label>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="form-field">
+              <label className="block font-bold mb-2">
+                Notebook ID<span className="text-red-500">*</span>
+              </label>
               <input
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
                 placeholder="ID"
                 required
                 name="id"
                 onChange={handleChange}
               />
-            </Form.Field>
-            <Button
-              type="button"
-              color="red"
-              floated="left"
-              onClick={() => router.back()}
-            >
-              cancel
-            </Button>
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              color="blue"
-              floated="right"
-            >
-              submit
-            </Button>
-          </Form>
+            </div>
+            <div className="flex justify-between">
+              <button
+                type="button"
+                className="btn btn-red"
+                onClick={() => router.back()}
+              >
+                cancel
+              </button>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn btn-blue"
+              >
+                submit
+              </button>
+            </div>
+          </form>
         )}
       </Formik>
     </section>

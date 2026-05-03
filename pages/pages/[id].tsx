@@ -8,7 +8,6 @@ import Layout from "../../components/layout";
 import PageForm from "../../components/page-form";
 import Intro from "../../components/intro";
 import Signin from "../../components/signin";
-import { Container } from "semantic-ui-react";
 
 const Edit = () => {
   const { user } = useUser();
@@ -39,10 +38,10 @@ const Edit = () => {
         <Head>
           <title>NoteBook</title>
         </Head>
-        <Container className="main-container">
+        <div className="container mx-auto px-4 main-container">
           <Intro />
           <PageForm page={data} action={submit} />
-        </Container>
+        </div>
       </Layout>
     </>
   );

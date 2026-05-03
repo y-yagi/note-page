@@ -1,5 +1,4 @@
 import { AppProps } from "next/app";
-import "semantic-ui-css/semantic.css";
 import "../styles/index.css";
 import React from "react";
 import { useEffect } from "react";

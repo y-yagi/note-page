@@ -27,3 +27,16 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.float-right {
+  float: right;
+}

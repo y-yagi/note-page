@@ -1,13 +1,10 @@
 import React from "react";
-import { Header, Icon } from "semantic-ui-react";
 
 const Intro = () => {
   return (
-    <>
-      <Header as="h2" icon textAlign="center" color="grey">
-        <Icon name="write" circular title="NoteBooks" />
-      </Header>
-    </>
+    <div className="text-center text-gray-600 my-4">
+      <h2 className="text-3xl font-bold">NoteBooks</h2>
+    </div>
   );
 };
 

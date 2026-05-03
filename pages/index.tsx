@@ -5,7 +5,6 @@ import Pages from "../components/pages";
 import Signin from "../components/signin";
 import Head from "next/head";
 import React from "react";
-import { Container } from "semantic-ui-react";
 
 const Index = () => {
   const { user } = useUser();
@@ -21,10 +20,10 @@ const Index = () => {
           <title>NoteBook</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Container className="main-container">
+        <div className="container mx-auto px-4 main-container">
           <Intro />
           <Pages />
-        </Container>
+        </div>
       </Layout>
     </>
   );
