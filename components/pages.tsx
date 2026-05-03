@@ -142,7 +142,10 @@ const Pages = () => {
                 Destroy
               </button>
               <Link
-                href={`/pages/${data[tabActiveIndex].id}?book=${noteBookPath}`}
+                href={{
+                  pathname: `/pages/${data[tabActiveIndex].id}`,
+                  query: { book: noteBookPath },
+                }}
                 passHref
               >
                 <a className="btn btn-blue float-right text-sm">Edit</a>
