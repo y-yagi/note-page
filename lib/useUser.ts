@@ -11,7 +11,7 @@ import { mapUserData } from "./mapUserData";
 import UserType from "../types/user";
 
 const useUser = () => {
-  const [user, setUser] = useState<UserType>();
+  const [user, setUser] = useState<UserType | undefined>(getUserFromCookie);
   const router = useRouter();
 
   const logout = async () => {
@@ -28,6 +28,11 @@ const useUser = () => {
   };
 
   useEffect(() => {
+    if (!getUserFromCookie()) {
+      router.push("/");
+      return;
+    }
+
     // Firebase updates the id token every hour, this
     // makes sure the react state and the cookie are
     // both kept up to date
@@ -41,13 +46,6 @@ const useUser = () => {
         setUser(undefined);
       }
     });
-
-    const userFromCookie = getUserFromCookie();
-    if (!userFromCookie) {
-      router.push("/");
-      return;
-    }
-    setUser(userFromCookie);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
