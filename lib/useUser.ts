@@ -11,7 +11,7 @@ import { mapUserData } from "./mapUserData";
 import UserType from "../types/user";
 
 const useUser = () => {
-  const [user, setUser] = useState<UserType>();
+  const [user, setUser] = useState<UserType | undefined>(getUserFromCookie);
   const router = useRouter();
 
   const logout = async () => {
@@ -42,12 +42,9 @@ const useUser = () => {
       }
     });
 
-    const userFromCookie = getUserFromCookie();
-    if (!userFromCookie) {
+    if (!getUserFromCookie()) {
       router.push("/");
-      return;
     }
-    setUser(userFromCookie);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
