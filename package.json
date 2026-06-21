@@ -62,6 +62,9 @@
       "protobufjs",
       "sharp",
       "unrs-resolver"
-    ]
+    ],
+    "patchedDependencies": {
+      "semantic-ui-css@2.5.0": "patches/semantic-ui-css@2.5.0.patch"
+    }
   }
 }
