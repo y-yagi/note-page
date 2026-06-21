@@ -1,0 +1,13 @@
+diff --git a/semantic.css b/semantic.css
+index 1d93bd7d61199f551e65d58814109f3eda64fcb9..5f5c0635818cb81d80d7cada72fdc5a4427e2bec 100755
+--- a/semantic.css
++++ b/semantic.css
+@@ -33922,7 +33922,7 @@ a.ui.nag {
+   box-shadow: none;
+ }
+ 
+-[data-tooltip][data-inverted]:after .header {
++[data-tooltip][data-inverted] .header {
+   background-color: none;
+   color: #FFFFFF;
+ }

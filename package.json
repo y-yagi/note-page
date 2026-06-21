@@ -1,6 +1,7 @@
 {
   "name": "note-page",
   "version": "1.0.0",
+  "packageManager": "pnpm@10.24.0",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -22,7 +23,7 @@
     "gray-matter": "4.0.3",
     "js-cookie": "^3.0.5",
     "marked": "^18.0.5",
-    "next": "^15.5.9",
+    "next": "^16.2.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-firebaseui": "^5.0.2",
@@ -62,6 +63,9 @@
       "protobufjs",
       "sharp",
       "unrs-resolver"
-    ]
+    ],
+    "patchedDependencies": {
+      "semantic-ui-css@2.5.0": "patches/semantic-ui-css@2.5.0.patch"
+    }
   }
 }
