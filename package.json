@@ -17,7 +17,7 @@
     "classnames": "2.5.1",
     "date-fns": "4.4.0",
     "dompurify": "^3.4.2",
-    "easymde": "^2.20.0",
+    "easymde": "^2.21.0",
     "firebase": "^8.10.1",
     "formik": "^2.4.9",
     "gray-matter": "4.0.3",
