@@ -26,8 +26,8 @@ importers:
         specifier: ^3.4.2
         version: 3.4.2
       easymde:
-        specifier: ^2.20.0
-        version: 2.20.0
+        specifier: ^2.21.0
+        version: 2.21.0
       firebase:
         specifier: ^8.10.1
         version: 8.10.1
@@ -63,7 +63,7 @@ importers:
         version: 0.6.6(prop-types@15.8.1)(react@18.3.1)(semantic-ui-react@2.1.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       react-simplemde-editor:
         specifier: ^5.2.0
-        version: 5.2.0(easymde@2.20.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 5.2.0(easymde@2.21.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       semantic-ui-css:
         specifier: ^2.5.0
         version: 2.5.0(patch_hash=dc5767af8d18bd01441227f200a828e39e750547a42948863a6e4c83c093922c)
@@ -1372,12 +1372,18 @@ packages:
   '@types/codemirror@5.60.16':
     resolution: {integrity: sha512-V/yHdamffSS075jit+fDxaOAmdP2liok8NSNJnAZfDJErzOheuygHZEhAJrfmk5TEyM32MhkZjwo/idX791yxw==}
 
+  '@types/codemirror@5.60.17':
+    resolution: {integrity: sha512-AZq2FIsUHVMlp7VSe2hTfl5w4pcUkoFkM3zVsRKsn1ca8CXRDYvnin04+HP2REkwsxemuHqvDofdlhUWNpbwfw==}
+
   '@types/dompurify@3.2.0':
     resolution: {integrity: sha512-Fgg31wv9QbLDA0SpTOXO3MaxySc4DKGLi8sna4/Utjo4r3ZRPdCt4UQee8BWr+Q5z21yifghREPJGYaEOEIACg==}
     deprecated: This is a stub types definition. dompurify provides its own type definitions, so you do not need this installed.
 
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
+
+  '@types/estree@1.0.9':
+    resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==}
 
   '@types/hoist-non-react-statics@3.3.7':
     resolution: {integrity: sha512-PQTyIulDkIDro8P+IHbKCsw7U2xxBYflVzW/FgWdCAePD9xGSidgA76/GeJ6lBKoblyhf9pBY763gbrN+1dI8g==}
@@ -1859,8 +1865,8 @@ packages:
   codemirror-spell-checker@1.1.2:
     resolution: {integrity: sha512-2Tl6n0v+GJRsC9K3MLCdLaMOmvWL0uukajNJseorZJsslaxZyZMgENocPU8R0DyoTAiKsyqiemSOZo7kjGV0LQ==}
 
-  codemirror@5.65.19:
-    resolution: {integrity: sha512-+aFkvqhaAVr1gferNMuN8vkTSrWIFvzlMV9I2KBLCWS2WpZ2+UAkZjlMZmEuT+gcXTi6RrGQCkWq1/bDtGqhIA==}
+  codemirror@5.65.21:
+    resolution: {integrity: sha512-6teYk0bA0nR3QP0ihGMoxuKzpl5W80FpnHpBJpgy66NK3cZv5b/d/HY8PnRvfSsCG1MTfr92u2WUl+wT0E40mQ==}
 
   collect-v8-coverage@1.0.3:
     resolution: {integrity: sha512-1L5aqIkwPfiodaMgQunkF1zRhNqifHBmtbbbxcr6yVxxBnliw4TDOW6NxpO8DJLgJ16OT+Y4ztZqP6p/FtXnAw==}
@@ -2012,8 +2018,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  easymde@2.20.0:
-    resolution: {integrity: sha512-V1Z5f92TfR42Na852OWnIZMbM7zotWQYTddNaLYZFVKj7APBbyZ3FYJ27gBw2grMW3R6Qdv9J8n5Ij7XRSIgXQ==}
+  easymde@2.21.0:
+    resolution: {integrity: sha512-5uE7I/DEN8gvGRwxaqAv7h1PMEK2ykNXVX5zL0dK3nCYROGja3AMbdQz8eCEELnfvCfy7tRkTmLuvyJG8uSWjQ==}
 
   electron-to-chromium@1.5.349:
     resolution: {integrity: sha512-QsWVGyRuY07Aqb234QytTfwd5d9AJlfNIQ5wIOl1L+PZDzI9d9+Fn0FRale/QYlFxt/bUnB0/nLd1jFPGxGK1A==}
@@ -3786,8 +3792,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typo-js@1.2.5:
-    resolution: {integrity: sha512-F45vFWdGX8xahIk/sOp79z2NJs8ETMYsmMChm9D5Hlx3+9j7VnCyQyvij5MOCrNY3NNe8noSyokRjQRfq+Bc7A==}
+  typo-js@1.3.2:
+    resolution: {integrity: sha512-Z1YkJ7IIYNrFeOxAlHUercY4Q2I+PhYD/3VkWpJGy/Oqudy3bFpNcQxnv6Oa9fTSXCHPGz1eDoX1bZYm2Z891A==}
 
   uc.micro@1.0.6:
     resolution: {integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==}
@@ -5346,11 +5352,17 @@ snapshots:
     dependencies:
       '@types/tern': 0.23.9
 
+  '@types/codemirror@5.60.17':
+    dependencies:
+      '@types/tern': 0.23.9
+
   '@types/dompurify@3.2.0':
     dependencies:
       dompurify: 3.4.2
 
   '@types/estree@1.0.8': {}
+
+  '@types/estree@1.0.9': {}
 
   '@types/hoist-non-react-statics@3.3.7(@types/react@18.3.23)':
     dependencies:
@@ -5413,7 +5425,7 @@ snapshots:
 
   '@types/tern@0.23.9':
     dependencies:
-      '@types/estree': 1.0.8
+      '@types/estree': 1.0.9
 
   '@types/trusted-types@2.0.7':
     optional: true
@@ -5871,9 +5883,9 @@ snapshots:
 
   codemirror-spell-checker@1.1.2:
     dependencies:
-      typo-js: 1.2.5
+      typo-js: 1.3.2
 
-  codemirror@5.65.19: {}
+  codemirror@5.65.21: {}
 
   collect-v8-coverage@1.0.3: {}
 
@@ -5996,11 +6008,11 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  easymde@2.20.0:
+  easymde@2.21.0:
     dependencies:
-      '@types/codemirror': 5.60.16
+      '@types/codemirror': 5.60.17
       '@types/marked': 4.3.2
-      codemirror: 5.65.19
+      codemirror: 5.65.21
       codemirror-spell-checker: 1.1.2
       marked: 4.3.0
 
@@ -7912,10 +7924,10 @@ snapshots:
       react: 18.3.1
       semantic-ui-react: 2.1.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
-  react-simplemde-editor@5.2.0(easymde@2.20.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-simplemde-editor@5.2.0(easymde@2.21.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@types/codemirror': 5.60.16
-      easymde: 2.20.0
+      easymde: 2.21.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
@@ -8359,7 +8371,7 @@ snapshots:
 
   typescript@6.0.3: {}
 
-  typo-js@1.2.5: {}
+  typo-js@1.3.2: {}
 
   uc.micro@1.0.6: {}
 
