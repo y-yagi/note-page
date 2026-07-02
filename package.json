@@ -50,7 +50,7 @@
     "eslint-config-next": "^16.2.10",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-unused-imports": "^4.4.1",
-    "jest": "^30.3.0",
+    "jest": "^30.4.2",
     "postcss-preset-env": "^11.2.1",
     "prettier": "^3.8.4"
   },
