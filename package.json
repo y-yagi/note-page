@@ -23,7 +23,7 @@
     "gray-matter": "4.0.3",
     "js-cookie": "^3.0.8",
     "marked": "^18.0.10",
-    "next": "^16.2.12",
+    "next": "^16.3.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-firebaseui": "^5.0.2",
