@@ -14,8 +14,11 @@ const Edit = () => {
   const { user, ready } = useUser();
   const router = useRouter();
   const { id, book } = router.query;
+  const validId = typeof id === "string" && /^[1-9][0-9]*$/.test(id);
   const { data, error } = useSWR<Page>(
-    router.isReady && user ? pagePath(book as string, id as string) : null,
+    router.isReady && user && validId && typeof book === "string"
+      ? pagePath(book, id as string)
+      : null,
     fetchPage,
   );
 
@@ -35,6 +38,9 @@ const Edit = () => {
   if (!user) {
     return <Signin />;
   }
+
+  if (router.isReady && (!validId || typeof book !== "string"))
+    return <p>Page not found</p>;
 
   if (error) return <p>Error: {error.message}</p>;
   if (!data) return <p>Loading...</p>;

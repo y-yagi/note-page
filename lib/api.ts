@@ -129,7 +129,7 @@ export const notebookPath = (name: string) =>
 export const pagesPath = (notebook: string) =>
   `${notebookPath(notebook)}/pages`;
 export const pagePath = (notebook: string, id: number | string) =>
-  `${pagesPath(notebook)}/${id}`;
+  `${pagesPath(notebook)}/${encodeURIComponent(String(id))}`;
 
 // SWR fetchers
 export const fetchNotebooks = async (path: string) =>
