@@ -92,9 +92,9 @@ const Pages = () => {
 
     data.forEach((page) =>
       panes.push({
-        menuItem: page.name,
+        menuItem: { key: String(page.id), content: page.name },
         render: () => (
-          <Tab.Pane className="Tab-body">
+          <Tab.Pane key={page.id} className="Tab-body">
             <Button
               type="submit"
               floated="right"
@@ -138,6 +138,7 @@ const Pages = () => {
       return;
     }
     setNoteBookPath(data.value);
+    setTabActiveIndex(0);
   }
 
   function destroyNotebook(data: Page[]) {
@@ -154,6 +155,7 @@ const Pages = () => {
           deleteNotebook(book)
             .then(() => {
               setNoteBookPath("default");
+              setTabActiveIndex(0);
               return mutate(notebooksPath);
             })
             .catch(showApiError);
