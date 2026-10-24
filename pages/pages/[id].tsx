@@ -11,7 +11,7 @@ import Signin from "../../components/signin";
 import { Container } from "semantic-ui-react";
 
 const Edit = () => {
-  const { user } = useUser();
+  const { user, ready } = useUser();
   const router = useRouter();
   const { id, book } = router.query;
   const { data, error } = useSWR<Page>(
@@ -26,6 +26,10 @@ const Edit = () => {
       mutate(pagesPath(book as string)),
     ]);
     window?.sessionStorage.setItem("book", book as string);
+  }
+
+  if (!ready) {
+    return null;
   }
 
   if (!user) {

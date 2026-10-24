@@ -10,7 +10,7 @@ import { mutate } from "swr";
 import { createNotebook, notebooksPath } from "../../lib/api";
 
 const New = () => {
-  const { user } = useUser();
+  const { user, ready } = useUser();
 
   const notebook: Notebook = {
     id: 0,
@@ -19,6 +19,10 @@ const New = () => {
     createdAt: null,
     updatedAt: null,
   };
+
+  if (!ready) {
+    return null;
+  }
 
   if (!user) {
     return <Signin />;

@@ -11,7 +11,7 @@ import Signin from "../../components/signin";
 import { Container } from "semantic-ui-react";
 
 const New = () => {
-  const { user } = useUser();
+  const { user, ready } = useUser();
   const router = useRouter();
   const { book } = router.query;
 
@@ -24,6 +24,10 @@ const New = () => {
     createdAt: new Date(),
     updatedAt: new Date(),
   };
+
+  if (!ready) {
+    return null;
+  }
 
   if (!user) {
     return <Signin />;

@@ -12,7 +12,10 @@ import { mapUserData } from "./mapUserData";
 import UserType from "../types/user";
 
 const useUser = () => {
-  const [user, setUser] = useState<UserType | undefined>(getUserFromCookie);
+  // The cookie is not available on the server, so start with no user and read
+  // it in an effect to keep the first client render identical to the server's.
+  const [user, setUser] = useState<UserType | undefined>(undefined);
+  const [ready, setReady] = useState(false);
   const router = useRouter();
 
   const clearCache = () => mutate(() => true, undefined, { revalidate: false });
@@ -35,7 +38,11 @@ const useUser = () => {
     // Firebase updates the id token every hour, this
     // makes sure the react state and the cookie are
     // both kept up to date
-    let currentUserId = getUserFromCookie()?.id;
+    const cookieUser = getUserFromCookie();
+    let currentUserId = cookieUser?.id;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setUser(cookieUser);
+    setReady(true);
     firebase.auth().onIdTokenChanged((user) => {
       if (user) {
         const userData = mapUserData(user);
@@ -54,13 +61,13 @@ const useUser = () => {
       }
     });
 
-    if (!getUserFromCookie()) {
+    if (!cookieUser) {
       router.push("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { user, logout };
+  return { user, ready, logout };
 };
 
 export { useUser };
