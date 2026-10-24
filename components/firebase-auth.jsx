@@ -13,7 +13,6 @@ const firebaseAuthConfig = {
   signInOptions: [
     {
       provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      scopes: ["https://www.googleapis.com/auth/contacts.readonly"],
       customParameters: {
         // Forces account selection even when one account
         // is available.
