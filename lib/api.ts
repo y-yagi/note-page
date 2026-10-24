@@ -4,9 +4,22 @@ import { toast } from "react-semantic-toasts";
 import Notebook from "../types/notebook";
 import Page from "../types/page";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 export const API_BASE_URL = (
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8787"
+  process.env.NEXT_PUBLIC_API_BASE_URL ||
+  (isProduction ? "" : "http://localhost:8787")
 ).replace(/\/+$/, "");
+
+// Checked lazily (not at module load) so builds without the variable succeed.
+// Prevents sending ID tokens to an unset or non-HTTPS endpoint in production.
+const assertApiBaseUrl = () => {
+  if (isProduction && !API_BASE_URL.startsWith("https://")) {
+    throw new Error(
+      "NEXT_PUBLIC_API_BASE_URL must be set to an https:// URL in production",
+    );
+  }
+};
 
 export class ApiError extends Error {
   status: number;
@@ -45,6 +58,7 @@ export const request = async <T>(
   path: string,
   body?: unknown,
 ): Promise<T> => {
+  assertApiBaseUrl();
   const token = await getIdToken();
   const headers: Record<string, string> = {
     Authorization: `Bearer ${token}`,
