@@ -9,10 +9,12 @@ import { SemanticToastContainer, toast } from "react-semantic-toasts";
 import "easymde/dist/easymde.min.css";
 import "react-semantic-toasts/styles/react-semantic-alert.css";
 import Page from "../types/page";
+import { showApiError } from "../lib/api";
 import { useFormGuard } from "../lib/useFormGuard";
 
 interface Props {
   page: Page;
+  notebook: string;
   action: Function;
 }
 
@@ -20,27 +22,29 @@ const SimpleMdeReact = dynamic(import("react-simplemde-editor"), {
   ssr: false,
 });
 
-const PageForm: NextPage<Props> = ({ page, action }) => {
+const PageForm: NextPage<Props> = ({ page, notebook, action }) => {
   const router = useRouter();
   const [name, setName] = useState(page.name);
   const [content, setContent] = useState(page.content);
 
   const handleKeyPress = (e: KeyboardEvent) => {
-    if (page.id !== "" && e.ctrlKey && e.key === "s") {
+    if (page.id !== 0 && e.ctrlKey && e.key === "s") {
       e.preventDefault();
       let msg = "Content doesn't changed";
 
-      setTimeout(() => {
+      setTimeout(async () => {
         if (page.content !== content) {
-          action(name, content);
-          msg = "Updated!";
+          try {
+            await action(name, content);
+            msg = "Updated!";
+            page.content = content;
+          } catch (err) {
+            showApiError(err);
+            return;
+          }
         }
-        page.content = content;
-      }, 500);
-
-      setTimeout(() => {
         toast({ title: "info", description: msg });
-      }, 1000);
+      }, 500);
     }
   };
 
@@ -90,9 +94,14 @@ const PageForm: NextPage<Props> = ({ page, action }) => {
           name: page.name,
           content: content,
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          action(name, content);
-          router.push(`/?book=${page.noteBookId}`);
+        onSubmit={async (values, { setSubmitting }) => {
+          try {
+            await action(name, content);
+            router.push(`/?book=${encodeURIComponent(notebook)}`);
+          } catch (e) {
+            showApiError(e);
+            setSubmitting(false);
+          }
         }}
         enableReinitialize={true}
       >

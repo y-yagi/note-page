@@ -1,7 +1,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useCollection, deleteDocument } from "@nandorojo/swr-firestore";
+import useSWR, { mutate } from "swr";
+import { SemanticToastContainer } from "react-semantic-toasts";
+import "react-semantic-toasts/styles/react-semantic-alert.css";
+import {
+  deleteNotebook,
+  deletePage,
+  fetchNotebooks,
+  fetchPages,
+  notebooksPath,
+  pagesPath,
+  showApiError,
+} from "../lib/api";
 import Page from "../types/page";
 import Notebook from "../types/notebook";
 import { useUser } from "../lib/useUser";
@@ -24,7 +35,6 @@ interface NoteBookOption {
 
 const Pages = () => {
   const { user } = useUser();
-  const notebookCollection = `notebooks-renew/${user?.id}/notebooks/`;
   const router = useRouter();
   const [noteBookPath, setNoteBookPath] = useState(() => {
     return (
@@ -35,18 +45,25 @@ const Pages = () => {
   });
   const [tabActiveIndex, setTabActiveIndex] = useState(0);
 
-  const { data, error } = useCollection<Page>(
-    `${notebookCollection}${noteBookPath}/pages`,
-    {
-      orderBy: ["updatedAt", "desc"],
-    },
+  const book = noteBookPath as string;
+
+  // The notebooks request creates the "default" notebook on first use, so the
+  // pages request waits for it.
+  const { data: notebooks, error: notebooksError } = useSWR<Notebook[]>(
+    user ? notebooksPath : null,
+    fetchNotebooks,
   );
 
-  const { data: notebooks } = useCollection<Notebook>(notebookCollection, {});
+  const { data, error: pagesError } = useSWR<Page[]>(
+    user && notebooks ? pagesPath(book) : null,
+    fetchPages,
+  );
+
+  const error = notebooksError || pagesError;
 
   if (error) {
     console.error(error);
-    return <p>Error: {JSON.stringify(error)}</p>;
+    return <p>Error: {error.message}</p>;
   }
   if (!data) return <p>Loading...</p>;
 
@@ -56,9 +73,9 @@ const Pages = () => {
 
     notebooks.forEach((book) => {
       options.push({
-        key: book.id,
-        value: book.id,
-        text: book.id,
+        key: book.name,
+        value: book.name,
+        text: book.name,
       });
     });
     options.push({
@@ -87,14 +104,17 @@ const Pages = () => {
                 if (
                   window.confirm("Are you sure you wish to delete this page?")
                 )
-                  deleteDocument(
-                    `${notebookCollection}${noteBookPath}/pages/${page.id}`,
-                  );
+                  deletePage(book, page.id)
+                    .then(() => mutate(pagesPath(book)))
+                    .catch(showApiError);
               }}
             >
               Destroy
             </Button>
-            <Link href={`/pages/${page.id}?book=${noteBookPath}`} passHref>
+            <Link
+              href={`/pages/${page.id}?book=${encodeURIComponent(book)}`}
+              passHref
+            >
               <Button type="submit" floated="right" color="blue" size="mini">
                 Edit
               </Button>
@@ -129,9 +149,14 @@ const Pages = () => {
         floated="right"
         color="red"
         onClick={() => {
-          if (window.confirm("Are you sure you wish to delete this notebook?"))
-            deleteDocument(`${notebookCollection}${noteBookPath}`);
-          setNoteBookPath("default");
+          if (!window.confirm("Are you sure you wish to delete this notebook?"))
+            return;
+          deleteNotebook(book)
+            .then(() => {
+              setNoteBookPath("default");
+              return mutate(notebooksPath);
+            })
+            .catch(showApiError);
         }}
       >
         Destroy a note book
@@ -141,6 +166,7 @@ const Pages = () => {
 
   return (
     <>
+      <SemanticToastContainer />
       <Header as="h3" icon textAlign="center" color="grey">
         <Select
           options={noteBooksOptions()}
@@ -149,7 +175,7 @@ const Pages = () => {
         />
       </Header>
       <Divider hidden section />
-      <Link href={`/pages/new?book=${noteBookPath}`} passHref>
+      <Link href={`/pages/new?book=${encodeURIComponent(book)}`} passHref>
         <Button as="a" color="blue">
           Create a new page
         </Button>
