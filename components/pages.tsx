@@ -9,6 +9,7 @@ import {
   deletePage,
   fetchNotebooks,
   fetchPages,
+  isValidNotebookName,
   notebooksPath,
   pagesPath,
   showApiError,
@@ -45,7 +46,7 @@ const Pages = () => {
   });
   const [tabActiveIndex, setTabActiveIndex] = useState(0);
 
-  const book = noteBookPath as string;
+  const book = isValidNotebookName(noteBookPath) ? noteBookPath : "default";
 
   // The notebooks request creates the "default" notebook on first use, so the
   // pages request waits for it.

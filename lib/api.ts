@@ -122,10 +122,23 @@ export const toPage = (r: RawPage): Page => ({
   updatedAt: new Date(r.updated_at),
 });
 
+// encodeURIComponent leaves "." alone and URL parsing resolves "." / ".."
+// segments (even as %2E), so such a name would send the request elsewhere.
+export const isValidNotebookName = (name: unknown): name is string =>
+  typeof name === "string" && name !== "" && name !== "." && name !== "..";
+
+const assertNotebookName = (name: string) => {
+  if (!isValidNotebookName(name)) {
+    throw new ApiError(400, "Invalid notebook name");
+  }
+};
+
 // Paths (also used as SWR keys)
 export const notebooksPath = "/notebooks";
-export const notebookPath = (name: string) =>
-  `/notebooks/${encodeURIComponent(name)}`;
+export const notebookPath = (name: string) => {
+  assertNotebookName(name);
+  return `/notebooks/${encodeURIComponent(name)}`;
+};
 export const pagesPath = (notebook: string) =>
   `${notebookPath(notebook)}/pages`;
 export const pagePath = (notebook: string, id: number | string) =>
@@ -140,9 +153,13 @@ export const fetchPage = async (path: string) =>
   toPage(await request<RawPage>("GET", path));
 
 // Writes
-export const createNotebook = async (name: string) =>
-  toNotebook(await request<RawNotebook>("POST", notebooksPath, { name }));
-export const deleteNotebook = (name: string) =>
+export const createNotebook = async (name: string) => {
+  assertNotebookName(name);
+  return toNotebook(
+    await request<RawNotebook>("POST", notebooksPath, { name }),
+  );
+};
+export const deleteNotebook = async (name: string) =>
   request<void>("DELETE", notebookPath(name));
 export const createPage = async (
   notebook: string,
@@ -161,7 +178,7 @@ export const updatePage = async (
   toPage(
     await request<RawPage>("PATCH", pagePath(notebook, id), { name, content }),
   );
-export const deletePage = (notebook: string, id: number) =>
+export const deletePage = async (notebook: string, id: number) =>
   request<void>("DELETE", pagePath(notebook, id));
 
 export const showApiError = (e: unknown) => {

@@ -6,7 +6,13 @@ import { useUser } from "../../lib/useUser";
 import Layout from "../../components/layout";
 import PageForm from "../../components/page-form";
 import Intro from "../../components/intro";
-import { fetchPage, pagePath, pagesPath, updatePage } from "../../lib/api";
+import {
+  fetchPage,
+  isValidNotebookName,
+  pagePath,
+  pagesPath,
+  updatePage,
+} from "../../lib/api";
 import Signin from "../../components/signin";
 import { Container } from "semantic-ui-react";
 
@@ -16,7 +22,7 @@ const Edit = () => {
   const { id, book } = router.query;
   const validId = typeof id === "string" && /^[1-9][0-9]*$/.test(id);
   const { data, error } = useSWR<Page>(
-    router.isReady && user && validId && typeof book === "string"
+    router.isReady && user && validId && isValidNotebookName(book)
       ? pagePath(book, id as string)
       : null,
     fetchPage,
@@ -39,7 +45,7 @@ const Edit = () => {
     return <Signin />;
   }
 
-  if (router.isReady && (!validId || typeof book !== "string"))
+  if (router.isReady && (!validId || !isValidNotebookName(book)))
     return <p>Page not found</p>;
 
   if (error) return <p>Error: {error.message}</p>;
