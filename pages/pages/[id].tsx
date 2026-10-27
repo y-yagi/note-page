@@ -1,37 +1,55 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useDocument } from "@nandorojo/swr-firestore";
-import firebase from "firebase/app";
+import useSWR, { mutate } from "swr";
 import Page from "../../types/page";
 import { useUser } from "../../lib/useUser";
 import Layout from "../../components/layout";
 import PageForm from "../../components/page-form";
 import Intro from "../../components/intro";
+import {
+  fetchPage,
+  isValidNotebookName,
+  pagePath,
+  pagesPath,
+  updatePage,
+} from "../../lib/api";
 import Signin from "../../components/signin";
 import { Container } from "semantic-ui-react";
 
 const Edit = () => {
-  const { user } = useUser();
+  const { user, ready } = useUser();
   const router = useRouter();
   const { id, book } = router.query;
-  const collection = `notebooks-renew/${user?.id}/notebooks/${book}/pages/${id}`;
-  const { data, update, error } = useDocument<Page>(collection);
+  const validId = typeof id === "string" && /^[1-9][0-9]*$/.test(id);
+  const { data, error } = useSWR<Page>(
+    router.isReady && user && validId && isValidNotebookName(book)
+      ? pagePath(book, id as string)
+      : null,
+    fetchPage,
+  );
 
   async function submit(name: string, content: string) {
-    await update({
-      name: name,
-      content: content,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+    const updated = await updatePage(book as string, Number(id), name, content);
+    await Promise.all([
+      mutate(pagePath(book as string, id as string), updated, false),
+      mutate(pagesPath(book as string)),
+    ]);
     window?.sessionStorage.setItem("book", book as string);
   }
 
-  if (error) return <p>Error: {JSON.stringify(error)}</p>;
-  if (!data) return <p>Loading...</p>;
+  if (!ready) {
+    return null;
+  }
 
   if (!user) {
     return <Signin />;
   }
+
+  if (router.isReady && (!validId || !isValidNotebookName(book)))
+    return <p>Page not found</p>;
+
+  if (error) return <p>Error: {error.message}</p>;
+  if (!data) return <p>Loading...</p>;
 
   return (
     <>
@@ -41,7 +59,7 @@ const Edit = () => {
         </Head>
         <Container className="main-container">
           <Intro />
-          <PageForm page={data} action={submit} />
+          <PageForm page={data} notebook={book as string} action={submit} />
         </Container>
       </Layout>
     </>
