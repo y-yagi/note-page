@@ -28,12 +28,46 @@ const DEFAULT_NAME = "default";
 
 const notFound: Reply = { status: 404, body: { error: "not found" } };
 
-const notebookErrors = (name: unknown): string[] => {
-  if (typeof name !== "string" || name === "") return ["name can't be blank"];
-  if (name.length > 100) return ["name is too long"];
-  if (!/^(?!\.\.?$)[^/]+$/.test(name)) return ["name is invalid"];
-  return [];
+type Rule = { presence?: true; maximum?: number; format?: RegExp };
+
+// Edgeway's validations: every rule of every attribute in declaration order,
+// all messages collected. Lengths count characters, not UTF-16 units.
+const validate = (
+  record: Record<string, unknown>,
+  rules: Record<string, Rule>,
+): string[] => {
+  const errors: string[] = [];
+  for (const [column, rule] of Object.entries(rules)) {
+    const v = record[column];
+    if (rule.presence && (v == null || String(v).trim() === "")) {
+      errors.push(`${column} can't be blank`);
+    }
+    if (v == null) continue;
+    if (rule.maximum !== undefined && [...String(v)].length > rule.maximum) {
+      errors.push(
+        `${column} is too long (maximum is ${rule.maximum} characters)`,
+      );
+    }
+    if (rule.format && !rule.format.test(String(v))) {
+      errors.push(`${column} is invalid`);
+    }
+  }
+  return errors;
 };
+
+// app/models/notebook.rb and app/models/page.rb
+const notebookRules: Record<string, Rule> = {
+  name: { presence: true, maximum: 100, format: /^(?!\.\.?$)[^/]+$/ },
+};
+const pageRules: Record<string, Rule> = {
+  name: { presence: true, maximum: 200 },
+  content: { maximum: 600_000 },
+};
+
+const invalid = (errors: string[]): Reply => ({
+  status: 422,
+  body: { errors },
+});
 
 // The user id is the token's "sub"; the emulator's tokens are unsigned JWTs.
 const userIdFrom = (request: Request): string | null => {
@@ -165,8 +199,8 @@ export class FakeApi {
   }
 
   private createNotebook(userId: string, name: unknown): Reply {
-    const errors = notebookErrors(name);
-    if (errors.length > 0) return { status: 422, body: { errors } };
+    const errors = validate({ name }, notebookRules);
+    if (errors.length > 0) return invalid(errors);
     return {
       status: 201,
       body: this.findOrCreateNotebook(userId, name as string),
@@ -194,16 +228,15 @@ export class FakeApi {
   }
 
   private createPage(notebook: Notebook, body: any): Reply {
-    if (!body?.name) {
-      return { status: 422, body: { errors: ["name can't be blank"] } };
-    }
+    const attributes = { name: body?.name, content: body?.content ?? "" };
+    const errors = validate(attributes, pageRules);
+    if (errors.length > 0) return invalid(errors);
     const now = this.now();
     const page = {
       id: this.nextId++,
       user_id: notebook.user_id,
       notebook_id: notebook.id,
-      name: body.name,
-      content: body.content ?? "",
+      ...attributes,
       created_at: now,
       updated_at: now,
     };
@@ -212,11 +245,15 @@ export class FakeApi {
   }
 
   private updatePage(page: PageRecord, body: any): Reply {
-    if (body?.name !== undefined && body.name === "") {
-      return { status: 422, body: { errors: ["name can't be blank"] } };
-    }
-    if (body?.name !== undefined) page.name = body.name;
-    if (body?.content !== undefined) page.content = body.content;
+    const updated = {
+      ...page,
+      ...(body?.name !== undefined && { name: body.name }),
+      ...(body?.content !== undefined && { content: body.content }),
+    };
+    const errors = validate(updated, pageRules);
+    if (errors.length > 0) return invalid(errors);
+    page.name = updated.name;
+    page.content = updated.content;
     page.updated_at = this.now();
     return { status: 200, body: page };
   }

@@ -13,6 +13,11 @@ const typeContent = async (page: Page, text: string) => {
 
 const notebookSelect = (page: Page) => page.getByRole("listbox");
 
+// The dropdown renders every option even when closed, so check the text of
+// the selected value only
+const selectedNotebook = (page: Page) =>
+  notebookSelect(page).locator("> .text");
+
 // Semantic UI's tab menu items have no tab role
 const pageTab = (page: Page, name: string) =>
   page.locator(".Tab-wrapped .item", { hasText: name });
@@ -25,7 +30,7 @@ test("asks to sign in when signed out", async ({ page, api }) => {
 
 test("creates, edits and destroys a page", async ({ page, api, signIn }) => {
   await signIn();
-  await expect(notebookSelect(page)).toContainText("default");
+  await expect(selectedNotebook(page)).toHaveText("default");
 
   await page.getByRole("button", { name: "Create a new page" }).click();
   await expect(page).toHaveURL("/pages/new?book=default");
@@ -80,11 +85,11 @@ test("creates and destroys a notebook", async ({ page, api, signIn }) => {
   await expect(page).toHaveURL("/");
   await notebookSelect(page).click();
   await page.getByRole("option", { name: "work" }).click();
-  await expect(notebookSelect(page)).toContainText("work");
+  await expect(selectedNotebook(page)).toHaveText("work");
 
   acceptDialogs(page);
   await page.getByRole("button", { name: "Destroy a note book" }).click();
-  await expect(notebookSelect(page)).toContainText("default");
+  await expect(selectedNotebook(page)).toHaveText("default");
   expect(api.notebooks.map((n) => n.name)).toEqual(["default"]);
   expect(api.requests).toContain("DELETE /notebooks/work");
 });
@@ -109,7 +114,7 @@ test.describe("dot segment notebook names", () => {
     api.requests = [];
     await page.reload();
 
-    await expect(notebookSelect(page)).toContainText("default");
+    await expect(selectedNotebook(page)).toHaveText("default");
     await expect(page.getByText("Create a new page")).toBeVisible();
     for (const r of api.requests) {
       expect(["GET /notebooks", "GET /notebooks/default/pages"]).toContain(r);
