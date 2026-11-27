@@ -143,7 +143,7 @@ const Pages = () => {
   }
 
   function destroyNotebook(data: Page[]) {
-    if (noteBookPath === "default" || data.length !== 0) return "";
+    if (book === "default" || data.length !== 0) return "";
 
     return (
       <Button
@@ -174,7 +174,7 @@ const Pages = () => {
         <Select
           options={noteBooksOptions()}
           onChange={onSelectChange}
-          defaultValue={noteBookPath}
+          value={book}
         />
       </Header>
       <Divider hidden section />

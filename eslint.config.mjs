@@ -21,4 +21,11 @@ export default defineConfig([
       "unused-imports/no-unused-imports": "error",
     },
   },
+  {
+    // Playwright fixtures call `use`, which is not a React hook
+    files: ["e2e/**"],
+    rules: {
+      "react-hooks/rules-of-hooks": "off",
+    },
+  },
 ]);
