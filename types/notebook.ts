@@ -1,5 +1,9 @@
 type NotebookType = {
-  id: string;
+  id: number;
+  userId: string;
+  name: string;
+  createdAt: Date | null;
+  updatedAt: Date | null;
 };
 
 export default NotebookType;

@@ -2,6 +2,9 @@ import { Formik } from "formik";
 import { Button, Form } from "semantic-ui-react";
 import { useRouter } from "next/router";
 import { NextPage } from "next";
+import { SemanticToastContainer } from "react-semantic-toasts";
+import "react-semantic-toasts/styles/react-semantic-alert.css";
+import { showApiError } from "../lib/api";
 import Notebook from "../types/notebook";
 
 interface Props {
@@ -14,27 +17,33 @@ const NotebookForm: NextPage<Props> = ({ notebook, action }) => {
 
   return (
     <section>
+      <SemanticToastContainer />
       <h3 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
         Notebooks
       </h3>
       <Formik
         initialValues={{
-          id: "",
+          name: "",
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          action(values["id"]);
-          router.push("/");
+        onSubmit={async (values, { setSubmitting }) => {
+          try {
+            await action(values["name"]);
+            router.push("/");
+          } catch (e) {
+            showApiError(e);
+            setSubmitting(false);
+          }
         }}
         enableReinitialize={true}
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <Form onSubmit={handleSubmit}>
             <Form.Field required>
-              <label>Notebook ID</label>
+              <label>Notebook Name</label>
               <input
-                placeholder="ID"
+                placeholder="Name"
                 required
-                name="id"
+                name="name"
                 onChange={handleChange}
               />
             </Form.Field>

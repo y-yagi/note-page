@@ -1,7 +1,8 @@
 type PageType = {
-  id: string;
+  // 0 means "not saved yet"
+  id: number;
   userId: string;
-  noteBookId: string;
+  notebookId: number;
   name: string;
   content: string;
   createdAt: Date;

@@ -1,7 +1,7 @@
 import Head from "next/head";
-import { useCollection } from "@nandorojo/swr-firestore";
 import { useRouter } from "next/router";
-import firebase from "firebase/app";
+import { mutate } from "swr";
+import { createPage, pagesPath } from "../../lib/api";
 import { useUser } from "../../lib/useUser";
 import Layout from "../../components/layout";
 import Page from "../../types/page";
@@ -11,37 +11,31 @@ import Signin from "../../components/signin";
 import { Container } from "semantic-ui-react";
 
 const New = () => {
-  const { user } = useUser();
+  const { user, ready } = useUser();
   const router = useRouter();
   const { book } = router.query;
 
   const page: Page = {
-    id: "",
+    id: 0,
     userId: user?.id || "",
-    noteBookId: book as string,
+    notebookId: 0,
     name: "",
     content: "",
     createdAt: new Date(),
     updatedAt: new Date(),
   };
 
-  const collection = `notebooks-renew/${user?.id}/notebooks/${book}/pages`;
-  const { add } = useCollection(collection);
-  const timestamp = () => firebase.firestore.FieldValue.serverTimestamp();
+  if (!ready) {
+    return null;
+  }
 
   if (!user) {
     return <Signin />;
   }
 
   async function submit(name: string, content: string) {
-    await add({
-      name: name,
-      content: content,
-      userId: user?.id,
-      noteBookId: book as string,
-      createdAt: timestamp(),
-      updatedAt: timestamp(),
-    });
+    await createPage(book as string, name, content);
+    await mutate(pagesPath(book as string));
     window?.sessionStorage.setItem("book", book as string);
   }
 
@@ -53,7 +47,7 @@ const New = () => {
         </Head>
         <Container>
           <Intro />
-          <PageForm page={page} action={submit} />
+          <PageForm page={page} notebook={book as string} action={submit} />
         </Container>
       </Layout>
     </>
